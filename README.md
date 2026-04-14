@@ -1,2 +1,2 @@
-# fitfit
+# FitFit
 Live longer and happier
