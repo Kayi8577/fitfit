@@ -1,0 +1,84 @@
+/* ══ XP BAR ══ */
+.lv-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;}
+.lv-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(125,212,184,0.18);
+  border:1.5px solid rgba(125,212,184,0.5);
+  border-radius:99px;padding:4px 12px;
+  font-size:11px;font-weight:800;color:var(--mint2);
+}
+.xp-lbl{font-size:11px;color:var(--text3);font-weight:700;}
+.xp-wrap{margin-top:7px;background:rgba(180,160,220,0.15);border-radius:99px;height:6px;overflow:hidden;}
+.xp-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--mint),var(--lavender));transition:width .8s cubic-bezier(.34,1.56,.64,1);}
+
+/* ══ SNAP CTA ══ */
+.snap-cta{
+  background:linear-gradient(135deg,rgba(125,212,184,0.22),rgba(184,157,232,0.18));
+  border:1.5px solid rgba(125,212,184,0.4);
+  border-radius:var(--r);padding:18px;margin-bottom:12px;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(125,212,184,0.15);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:transform .15s;
+}
+.snap-cta:active{transform:scale(.98);}
+.snap-cta-row{display:flex;align-items:center;gap:14px;}
+.snap-icon-wrap{
+  width:56px;height:56px;border-radius:16px;
+  background:linear-gradient(135deg,var(--mint-soft),var(--lav-soft));
+  display:flex;align-items:center;justify-content:center;font-size:28px;
+  flex-shrink:0;border:1px solid rgba(125,212,184,0.3);
+}
+.snap-title{font-size:17px;font-weight:900;color:var(--text);margin-bottom:3px;}
+.snap-sub{font-size:12px;color:var(--text2);font-weight:600;}
+.snap-arrow{font-size:20px;color:var(--mint2);margin-left:auto;flex-shrink:0;}
+.snap-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+
+/* ══ STAT GRID ══ */
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.stat{
+  background:var(--card);border-radius:var(--rsm);padding:14px;
+  border:1px solid var(--border);
+  box-shadow:0 3px 14px var(--shadow);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  position:relative;overflow:hidden;
+}
+.stat-glow{position:absolute;top:-20px;right:-20px;width:70px;height:70px;border-radius:50%;filter:blur(22px);opacity:.38;}
+.stat-lb{font-size:10px;color:var(--text3);font-weight:800;letter-spacing:.6px;text-transform:uppercase;margin-bottom:5px;}
+.stat-val{font-size:26px;font-weight:900;line-height:1;color:var(--text);}
+.stat-u{font-size:12px;color:var(--text2);font-weight:600;}
+.stat-bar{height:4px;background:rgba(180,160,220,0.18);border-radius:99px;margin-top:9px;}
+.stat-bf{height:4px;border-radius:99px;transition:width .8s cubic-bezier(.34,1.56,.64,1);}
+
+/* ══ STREAK ══ */
+.streak-wrap{display:flex;align-items:center;gap:12px;padding:4px 0 10px;}
+.s-fire{font-size:40px;animation:firePulse 2s ease-in-out infinite;}
+@keyframes firePulse{0%,100%{transform:scale(1)rotate(-3deg)}50%{transform:scale(1.1)rotate(3deg)}}
+.s-num{font-size:50px;font-weight:900;color:var(--peach);line-height:1;}
+.s-lb{font-size:15px;font-weight:800;color:var(--text);}
+.s-sub{font-size:12px;color:var(--text2);font-weight:600;margin-top:2px;}
+
+/* Week dots */
+.wdots{display:flex;gap:5px;margin:10px 0;}
+.wd{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.wd-c{
+  width:33px;height:33px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;
+  border:2px solid var(--border2);
+  background:rgba(255,255,255,0.6);
+  transition:all .3s;color:var(--text3);
+}
+.wd-c.done{background:var(--mint);border-color:var(--mint2);color:#fff;font-size:14px;}
+.wd-c.today{border-color:var(--mint2);border-width:2.5px;color:var(--mint2);}
+.wd-c.rest{opacity:.35;}
+.wd-lb{font-size:9px;color:var(--text3);font-weight:800;}
+
+/* Week chart */
+.week-chart{display:flex;align-items:flex-end;gap:5px;height:62px;}
+.wb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.wb-bar{width:100%;border-radius:5px 5px 0 0;min-height:4px;transition:height .5s;}
+.wb-day{font-size:9px;color:var(--text3);font-weight:800;}
+
+/* Weight history */
+.wt-hist{font-size:11px;color:var(--text2);margin-top:5px;line-height:1.8;font-weight:700;}

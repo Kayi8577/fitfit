@@ -1,0 +1,13 @@
+{
+  "name": "FitFit",
+  "short_name": "FitFit",
+  "description": "拍照識別卡路里的健康管理小幫手",
+  "lang": "zh-Hant",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#e8faf4",
+  "theme_color": "#e8faf4",
+  "icons": [
+    { "src": "assets/icons/app-icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "fitfit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "拍照識別卡路里的健康管理 PWA — pastel fitness tracker",
+  "type": "module",
+  "scripts": {
+    "start": "npx -y serve -l 3000 ."
+  }
+}

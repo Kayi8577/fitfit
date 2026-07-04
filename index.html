@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="FitFit">
+<meta name="application-name" content="FitFit">
+<meta name="theme-color" content="#e8faf4">
+<title>FitFit ✨</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/app-icon.png">
+<link rel="icon" type="image/png" href="assets/icons/app-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/features/background.css">
+<link rel="stylesheet" href="css/features/home.css">
+<link rel="stylesheet" href="css/features/workout.css">
+<link rel="stylesheet" href="css/features/videos.css">
+<link rel="stylesheet" href="css/features/camera.css">
+<link rel="stylesheet" href="css/features/insights.css">
+<link rel="stylesheet" href="css/features/feedback.css">
+</head>
+<body>
+
+<!-- ══ GLOBAL ANIMATED BACKGROUND ══ -->
+<div id="bg-canvas"></div>
+
+<!-- ══ CAMERA MODAL ══ -->
+<div class="cam-modal" id="cam-modal">
+  <div class="cam-bg"></div>
+  <div class="cam-bg-elements" id="cam-bg-el"></div>
+  <div class="cam-ui">
+    <div class="cam-header">
+      <div class="cam-title">📸 拍照識別卡路里</div>
+      <div class="cam-sub">AI 秒速分析 · 薄荷馬卡龍時光 🍃</div>
+    </div>
+    <div class="cam-frame" id="cam-frame" data-action="triggerUpload">
+      <div class="cam-corner tl"></div><div class="cam-corner tr"></div>
+      <div class="cam-corner bl"></div><div class="cam-corner br"></div>
+      <div class="cam-scan"></div>
+      <img class="cam-preview" id="cam-preview" alt="">
+      <div class="cam-ph" id="cam-ph">
+        <div class="icon">🍽️</div>
+        <p>點擊上傳食物照片</p>
+        <p style="font-size:11px;margin-top:3px;color:var(--text3)">支援台灣、日式、西式料理</p>
+      </div>
+    </div>
+    <input type="file" id="file-in" accept="image/*" style="display:none">
+    <div id="ai-res-wrap"></div>
+    <div class="cam-actions" id="cam-actions">
+      <button class="cam-btn cam-btn-sec" data-action="closeCam">✕ 關閉</button>
+      <button class="cam-btn cam-btn-main" data-action="triggerUpload">📷 選擇照片</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAB ══ -->
+<button class="fab" data-action="openCam">
+  <div class="fab-pulse"></div>📷
+</button>
+
+<!-- ══ BOTTOM NAV ══ -->
+<nav class="bnav">
+  <div class="ni active" data-action="navigate" data-section="home"><div class="ni-ic">🏠</div><div class="ni-lb">首頁</div></div>
+  <div class="ni" data-action="navigate" data-section="food"><div class="ni-ic">🥗</div><div class="ni-lb">飲食</div></div>
+  <div class="ni" data-action="navigate" data-section="plan"><div class="ni-ic">📅</div><div class="ni-lb">計畫</div></div>
+  <div class="ni" data-action="navigate" data-section="videos"><div class="ni-ic">▶️</div><div class="ni-lb">影片</div></div>
+  <div class="ni" data-action="navigate" data-section="more"><div class="ni-ic">⚙️</div><div class="ni-lb">更多</div></div>
+</nav>
+
+<div class="app">
+<div class="content">
+
+<!-- ══ 首頁 ══ -->
+<div id="home" class="sec active">
+  <div class="hdr">
+    <div class="hdr-greet" id="greeting">早安 ☀️</div>
+    <div class="hdr-title">今天吃了什麼？<br><em>拍一下就知道！</em></div>
+    <div class="lv-row">
+      <div class="lv-badge">⚡ Lv.<span id="user-level">1</span> <span id="user-title">健康學徒</span></div>
+      <div class="xp-lbl"><span id="cur-xp">0</span>/<span id="max-xp">200</span> XP</div>
+    </div>
+    <div class="xp-wrap"><div class="xp-fill" id="xp-bar" style="width:0%"></div></div>
+  </div>
+  <div style="height:18px"></div>
+
+  <div class="snap-cta" data-action="openCam">
+    <div class="snap-cta-row">
+      <div class="snap-icon-wrap">📷</div>
+      <div><div class="snap-title">拍照識別卡路里</div><div class="snap-sub">AI 秒速分析 · 比手動快10倍 · 支援台灣料理</div></div>
+      <div class="snap-arrow">→</div>
+    </div>
+    <div class="snap-tags">
+      <span class="chip cm">✓ 便當盒</span><span class="chip cs">✓ 火鍋</span><span class="chip cl">✓ 日式</span><span class="chip cp">✓ 麵食</span>
+    </div>
+  </div>
+
+  <div class="sgrid">
+    <div class="stat"><div class="stat-glow" style="background:var(--mint)"></div><div class="stat-lb">今日攝入</div><div><span class="stat-val" id="s-cal">0</span><span class="stat-u"> kcal</span></div><div class="stat-bar"><div class="stat-bf" id="s-cal-b" style="width:0%;background:var(--mint)"></div></div></div>
+    <div class="stat"><div class="stat-glow" style="background:var(--sky)"></div><div class="stat-lb">運動消耗</div><div><span class="stat-val" id="s-burn">0</span><span class="stat-u"> kcal</span></div><div class="stat-bar"><div class="stat-bf" id="s-burn-b" style="width:0%;background:var(--sky)"></div></div></div>
+    <div class="stat"><div class="stat-glow" style="background:var(--lavender)"></div><div class="stat-lb">睡眠</div><div><span class="stat-val" id="s-sleep">-</span><span class="stat-u"> 小時</span></div><div class="stat-bar"><div class="stat-bf" id="s-sleep-b" style="width:0%;background:var(--lavender)"></div></div></div>
+    <div class="stat"><div class="stat-glow" style="background:var(--peach)"></div><div class="stat-lb">本週運動</div><div><span class="stat-val" id="s-ex">0</span><span class="stat-u">/<span id="s-ex-g">3</span></span></div><div class="stat-bar"><div class="stat-bf" id="s-ex-b" style="width:0%;background:var(--peach)"></div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="streak-wrap">
+      <div class="s-fire">🔥</div>
+      <div class="s-num" id="h-streak">0</div>
+      <div><div class="s-lb">連續運動天數</div><div class="s-sub" id="h-streak-sub">完成今日任務開始累積！</div></div>
+    </div>
+    <div class="wdots" id="wdots"></div>
+  </div>
+
+  <div class="card">
+    <div class="ct">今日飲食 <span class="ct-link" data-action="openCam">+ 拍照新增</span></div>
+    <div id="home-food-list"><div class="empty" style="padding:12px">還沒有記錄，點上方拍照！</div></div>
+    <hr>
+    <div class="pr"><div class="pr-l">目標</div><div class="pr-bg"><div class="pr-f" style="width:100%;background:rgba(125,212,184,0.25)"></div></div><div class="pr-v" id="h-gcal">1800 kcal</div></div>
+    <div class="pr"><div class="pr-l">已吃</div><div class="pr-bg"><div class="pr-f" id="h-pf" style="width:0%;background:var(--mint)"></div></div><div class="pr-v" id="h-pfv">0 kcal</div></div>
+    <hr>
+    <div class="sr"><div class="sr-l">淨缺口（目標 ≥400）</div><div class="sr-v" id="h-def" style="color:var(--text2)">—</div></div>
+  </div>
+
+  <div class="card"><div class="ct">本週運動（分鐘）</div><div class="week-chart" id="week-chart"></div></div>
+
+  <div class="card">
+    <div class="ct">體重記錄</div>
+    <div class="fr"><label>今日體重</label><input type="number" id="wt-in" placeholder="kg" step="0.1" inputmode="decimal"><button class="btn-p btn-sm" data-action="saveWeight">記錄</button></div>
+    <div class="wt-hist" id="wt-hist"></div>
+  </div>
+</div>
+
+<!-- ══ 飲食 ══ -->
+<div id="food" class="sec">
+  <div class="hdr"><div class="ct-big">飲食記錄</div><div style="font-size:12px;color:var(--text2);margin-top:4px;font-weight:700">拍照或手動記錄</div></div>
+  <div style="height:16px"></div>
+  <div class="snap-cta" data-action="openCam" style="text-align:center;padding:22px">
+    <div style="font-size:48px;margin-bottom:8px">📸</div>
+    <div class="snap-title" style="margin-bottom:4px">拍照識別卡路里</div>
+    <div class="snap-sub" style="margin-bottom:14px">上傳食物照片 → AI 自動計算熱量</div>
+    <div class="snap-tags" style="justify-content:center"><span class="chip cm">✓ 台式便當</span><span class="chip cs">✓ 日式料理</span><span class="chip cl">✓ 火鍋燒烤</span><span class="chip cp">✓ 麵食點心</span></div>
+  </div>
+  <div class="card">
+    <div class="ct">手動新增</div>
+    <div class="fr"><label>食物名稱</label><input type="text" id="food-name" placeholder="例如：雞腿便當"></div>
+    <div class="fr"><label>熱量</label><input type="number" id="food-cal" placeholder="kcal" inputmode="numeric"></div>
+    <div class="fr"><label>蛋白質</label><input type="number" id="food-pro" placeholder="g（選填）" inputmode="decimal"></div>
+    <div class="fr"><label>類別</label><select id="food-type"><option>早餐</option><option>午餐</option><option>晚餐</option><option>點心</option></select></div>
+    <button class="btn-p" data-action="addFood" style="margin-top:4px">新增 +10 XP</button>
+  </div>
+  <div class="card">
+    <div class="ct">今日飲食 <span class="ct-link" data-action="openCam">+ 拍照</span></div>
+    <div id="food-log-list"><div class="empty">尚無記錄，拍張照片開始！</div></div>
+    <hr>
+    <div class="sr"><div class="sr-l">總熱量</div><div class="sr-v" id="food-tot">0 kcal</div></div>
+    <div class="sr" style="margin-top:5px"><div class="sr-l">蛋白質</div><div class="sr-v" style="color:var(--sky)" id="food-pro-tot">0 g</div></div>
+  </div>
+  <div class="card">
+    <div class="ct">間歇性斷食</div>
+    <div class="fr"><label>進食開始</label><input type="time" id="if-s" value="10:00"></div>
+    <div class="fr"><label>進食結束</label><input type="time" id="if-e" value="20:00"></div>
+    <div style="font-size:12px;color:var(--text2);margin-top:4px;line-height:1.6;font-weight:700" id="if-info"></div>
+  </div>
+</div>
+
+<!-- ══ 計畫 ══ -->
+<div id="plan" class="sec">
+  <div class="hdr"><div class="ct-big">運動計畫</div></div>
+  <div style="height:16px"></div>
+  <div class="card"><div class="ct">選擇階段</div><div class="pph" id="phase-pills"></div><div style="font-size:12px;color:var(--text2);line-height:1.65;font-weight:700" id="phase-desc"></div></div>
+  <div class="card">
+    <div class="ct">本週排程 <span style="color:var(--mint2);font-size:10px;font-weight:800" id="wk-g-lbl"></span></div>
+    <div class="wkplan" id="wk-plan"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--text3);font-weight:800"><span>✅ 完成</span><span style="color:var(--mint2)">⬤ 今天</span><span>💜 休息</span></div>
+  </div>
+  <div class="card"><div class="ct" id="today-wk-lbl">今日任務</div><div id="today-wk-detail"></div></div>
+  <div class="card">
+    <div class="ct">記錄運動</div>
+    <div class="fr"><label>類型</label><select id="ex-type"><option value="快走,3.5">快走</option><option value="慢跑,6">慢跑</option><option value="跑步,8">跑步</option><option value="深蹲,4">深蹲/重訓</option><option value="核心,3">核心訓練</option><option value="游泳,7">游泳</option><option value="HIIT,10">HIIT</option><option value="騎單車,6">騎單車</option><option value="瑜珈,3">瑜珈/伸展</option></select></div>
+    <div class="fr"><label>時長</label><input type="number" id="ex-min" value="20" inputmode="numeric"><span style="font-size:12px;color:var(--text2);font-weight:700">分鐘</span></div>
+    <div class="fr"><label>體重</label><input type="number" id="ex-w" value="65" inputmode="decimal"><span style="font-size:12px;color:var(--text2);font-weight:700">kg</span></div>
+    <div style="font-size:12px;color:var(--text2);margin:0 0 10px;font-weight:700">預估消耗：<strong id="ex-prev" style="color:var(--sky)">—</strong></div>
+    <button class="btn-p" data-action="addExercise">記錄運動 +XP</button>
+    <div id="ex-list" style="margin-top:12px"><div class="empty">今日尚無記錄</div></div>
+  </div>
+  <div class="card">
+    <div class="ct">瀏覽課表</div>
+    <div class="ltabs"><div class="lt active" data-action="setLevel" data-level="easy">初階 🌱</div><div class="lt" data-action="setLevel" data-level="medium">中階 🌿</div><div class="lt" data-action="setLevel" data-level="hard">進階 🌳</div></div>
+    <div id="all-wks"></div>
+  </div>
+</div>
+
+<!-- ══ 影片 ══ -->
+<div id="videos" class="sec">
+  <div class="hdr"><div class="ct-big">今日影片</div><div style="font-size:12px;color:var(--text2);margin-top:3px;font-weight:700">根據你的計畫智能推薦</div></div>
+  <div style="height:16px"></div>
+  <div class="card" style="padding:12px 13px 10px"><div class="ct">篩選類型</div><div class="ctabs" id="cat-tabs"></div></div>
+  <div class="card" style="padding:13px"><div class="ct">⭐ 今日精選</div><div id="vids-today"></div></div>
+  <div class="card" style="padding:13px"><div class="ct">更多推薦</div><div id="vids-more"></div></div>
+</div>
+
+<!-- ══ 更多 ══ -->
+<div id="more" class="sec">
+  <div class="hdr"><div class="ct-big">更多功能</div></div>
+  <div style="height:16px"></div>
+
+  <div class="card">
+    <div class="ct">睡眠記錄</div>
+    <div class="fr"><label>入睡</label><input type="time" id="sl-s" value="23:00"></div>
+    <div class="fr"><label>起床</label><input type="time" id="sl-e" value="07:00"></div>
+    <div class="fr"><label>品質</label><select id="sl-q"><option>很好</option><option>普通</option><option>較差</option></select></div>
+    <button class="btn-p" data-action="addSleep" style="margin-top:4px">記錄 +15 XP</button>
+    <div id="sleep-list" style="margin-top:12px"><div class="empty">尚無記錄</div></div>
+  </div>
+
+  <div class="card">
+    <div class="ct">BMI 計算</div>
+    <div class="fr"><label>身高</label><input type="number" id="bmi-h" placeholder="cm" inputmode="decimal"></div>
+    <div class="fr"><label>體重</label><input type="number" id="bmi-w" placeholder="kg" inputmode="decimal"></div>
+    <div class="fr"><label>年齡</label><input type="number" id="bmi-age" placeholder="歲" inputmode="numeric"></div>
+    <div class="fr"><label>性別</label><select id="bmi-sex"><option value="m">男</option><option value="f">女</option></select></div>
+    <button class="btn-p" data-action="calcBMI" style="margin-top:4px">計算 +20 XP</button>
+    <div id="bmi-res" style="display:none;margin-top:12px">
+      <div class="bmi-num" id="bmi-val">—</div><div class="bmi-cat" id="bmi-cat"></div>
+      <div class="bmi-scale"><div style="background:var(--sky);flex:1.5"></div><div style="background:var(--mint);flex:1.1"></div><div style="background:var(--peach);flex:1"></div><div style="background:var(--pink);flex:1.5"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-bottom:4px;font-weight:800"><span>偏輕</span><span>正常</span><span>過重</span><span>肥胖</span></div>
+      <div class="bmi-mkr"><div class="bmi-ptr" id="bmi-ptr">▲</div></div>
+      <hr>
+      <div style="font-size:13px;color:var(--text2);line-height:1.9;font-weight:700">
+        <div>每日建議熱量（TDEE）：<strong id="tdee-lbl" style="color:var(--text)">—</strong></div>
+        <div>減脂建議攝入（-20%）：<strong id="cut-lbl" style="color:var(--mint2)">—</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ct">目標設定</div>
+    <div class="fr"><label>每週運動</label><input type="number" id="g-ex" value="3" min="1" max="7" inputmode="numeric"><span style="font-size:11px;color:var(--text2);font-weight:700">次</span></div>
+    <div class="fr"><label>每日熱量</label><input type="number" id="g-cal" value="1800" inputmode="numeric"><span style="font-size:11px;color:var(--text2);font-weight:700">kcal</span></div>
+    <div class="fr"><label>每日睡眠</label><input type="number" id="g-sleep" value="7.5" step="0.5" inputmode="decimal"><span style="font-size:11px;color:var(--text2);font-weight:700">小時</span></div>
+    <button class="btn-p" data-action="saveGoals" style="margin-top:4px">儲存目標</button>
+    <div style="margin-top:14px" id="goal-prog"></div>
+  </div>
+
+  <div class="card">
+    <div class="ct">提醒設定</div>
+    <div class="fr"><label>時間</label><input type="time" id="r-time" value="07:00"></div>
+    <div class="fr"><label>內容</label><input type="text" id="r-msg" placeholder="例如：午餐記得拍照記錄！"></div>
+    <button class="btn-s btn-sm" data-action="addReminder" style="margin-bottom:12px">新增提醒</button>
+    <div id="remind-list"></div>
+  </div>
+
+  <div class="card"><div class="ct">成就徽章</div><div class="bdgrid" id="badge-grid"></div></div>
+
+  <div class="card">
+    <div class="ct">AI 個人建議</div>
+    <div class="fr"><label>方向</label><select id="ai-topic"><option value="overall">整體計畫</option><option value="workout">運動建議</option><option value="diet">飲食調整</option><option value="sleep">睡眠改善</option><option value="plateau">突破平台期</option></select></div>
+    <div class="fr"><label>補充</label><input type="text" id="ai-extra" placeholder="例如：膝蓋不適、素食者"></div>
+    <button class="btn-s" data-action="askCoach" style="margin-top:4px">獲取 AI 建議 ↗</button>
+    <div id="ai-out" style="margin-top:12px"></div>
+  </div>
+</div>
+
+</div></div><!-- content / app -->
+
+<div class="xppop" id="xppop"><span class="xp-em" id="xp-em">🎉</span><div class="xp-t" id="xp-t">完成！</div><div class="xp-s" id="xp-s"></div><div class="xp-x" id="xp-x">+50 XP</div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

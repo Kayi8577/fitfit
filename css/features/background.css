@@ -1,0 +1,37 @@
+/* ══ ANIMATED BACKGROUND (fixed, whole app) ══ */
+#bg-canvas{
+  position:fixed;inset:0;z-index:0;
+  overflow:hidden;pointer-events:none;
+  background:linear-gradient(145deg,#e8faf4 0%,#f0eaff 28%,#fce8f5 55%,#e8f4ff 78%,#f5ffe8 100%);
+}
+
+/* Soft glow orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(48px);animation:orbFloat ease-in-out infinite alternate;}
+@keyframes orbFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(14px,-16px) scale(1.07)}}
+
+/* CSS clouds */
+.cloud{position:absolute;animation:cloudDrift linear infinite;}
+@keyframes cloudDrift{from{transform:translateX(-260px)}to{transform:translateX(calc(100vw + 260px))}}
+.cloud-body{position:relative;}
+.cloud-base,.cloud-bump{position:absolute;background:rgba(255,255,255,0.82);border-radius:50%;}
+
+/* CSS petals */
+.petal{position:absolute;border-radius:68% 32% 68% 32% / 32% 68% 32% 68%;animation:petalFall linear infinite;}
+@keyframes petalFall{
+  0%{opacity:0;transform:translateY(-24px) rotate(0deg) translateX(0)}
+  6%{opacity:.85}
+  90%{opacity:.7}
+  100%{opacity:0;transform:translateY(101vh) rotate(380deg) translateX(55px)}
+}
+
+/* Sparkle dots */
+.sp-dot{position:absolute;border-radius:50%;animation:spPulse ease-in-out infinite;}
+@keyframes spPulse{0%,100%{transform:scale(.65);opacity:.3}50%{transform:scale(1.35);opacity:.85}}
+
+/* Soft rings */
+.soft-ring{position:absolute;border-radius:50%;border-style:solid;animation:ringBreath ease-in-out infinite alternate;}
+@keyframes ringBreath{from{transform:scale(.93);opacity:.28}to{transform:scale(1.07);opacity:.55}}
+
+/* Macaroon blobs */
+.mac{position:absolute;border-radius:50%;animation:macBob ease-in-out infinite alternate;}
+@keyframes macBob{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-12px) rotate(5deg)}}

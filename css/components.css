@@ -1,0 +1,98 @@
+/* ══ CARDS ══ */
+.card{
+  background:var(--card);
+  border-radius:var(--r);
+  padding:16px;
+  margin-bottom:12px;
+  border:1px solid var(--border);
+  box-shadow:0 4px 20px var(--shadow);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.card-2{background:var(--card2);}
+.ct{font-size:11px;font-weight:800;color:var(--text2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px;}
+.ct-big{font-size:20px;font-weight:900;color:var(--text);}
+.ct-link{float:right;font-size:11px;color:var(--mint2);cursor:pointer;font-weight:800;}
+
+/* ══ FORMS ══ */
+.fr{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.fr label{font-size:11px;color:var(--text2);min-width:55px;flex-shrink:0;font-weight:800;}
+.fr input,.fr select{
+  flex:1;min-width:0;padding:10px 12px;font-size:14px;font-weight:600;
+  border:1.5px solid var(--border2);border-radius:var(--rsm);
+  background:rgba(255,255,255,0.75);color:var(--text);font-family:'Nunito',sans-serif;
+  -webkit-appearance:none;transition:border-color .2s;
+}
+.fr input:focus,.fr select:focus{outline:none;border-color:var(--mint);}
+
+/* ══ BUTTONS ══ */
+.btn-p{
+  display:block;width:100%;padding:14px;font-size:15px;font-weight:800;
+  border-radius:var(--rsm);border:none;cursor:pointer;font-family:'Nunito',sans-serif;
+  background:linear-gradient(135deg,var(--mint),var(--lavender));
+  color:#fff;letter-spacing:.2px;transition:all .15s;
+  box-shadow:0 4px 16px rgba(125,212,184,0.3);
+}
+.btn-p:active{transform:scale(.97);}
+.btn-s{
+  display:block;width:100%;padding:13px;font-size:14px;font-weight:800;
+  border-radius:var(--rsm);border:2px solid var(--mint);cursor:pointer;
+  font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.7);color:var(--mint2);
+}
+.btn-sm{padding:7px 14px;font-size:12px;width:auto;display:inline-block;}
+
+/* ══ LOG ITEMS ══ */
+.li{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:11px 13px;background:rgba(255,255,255,0.62);
+  border-radius:var(--rsm);margin-bottom:7px;
+  border:1px solid var(--border);
+}
+.li-n{font-size:13px;font-weight:700;color:var(--text);}
+.li-d{font-size:11px;color:var(--text2);margin-top:2px;font-weight:600;}
+.li-v{font-size:14px;font-weight:900;text-align:right;color:var(--text);}
+.li-u{font-size:11px;color:var(--text2);text-align:right;}
+
+/* Photo log items */
+.pli{display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(255,255,255,0.62);border-radius:var(--rsm);margin-bottom:7px;border:1px solid var(--border);}
+.pli-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--mint-soft),var(--lav-soft));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--border);}
+.pli-name{font-size:13px;font-weight:700;color:var(--text);}
+.pli-det{font-size:11px;color:var(--text2);margin-top:2px;font-weight:600;}
+.pli-cal{font-size:15px;font-weight:900;color:var(--peach);white-space:nowrap;}
+
+/* ══ CHIPS ══ */
+.chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:800;}
+.cm{background:rgba(125,212,184,0.18);color:var(--mint2);}
+.cl{background:rgba(184,157,232,0.18);color:#8060c0;}
+.cp{background:rgba(240,160,200,0.18);color:#c04080;}
+.co{background:rgba(240,192,144,0.18);color:#c06020;}
+.cs{background:rgba(144,200,240,0.18);color:#2060c0;}
+
+/* ══ PROGRESS ROWS ══ */
+.pr{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
+.pr-l{font-size:11px;color:var(--text2);min-width:50px;font-weight:700;}
+.pr-bg{flex:1;height:7px;background:rgba(180,160,220,0.18);border-radius:99px;}
+.pr-f{height:7px;border-radius:99px;transition:width .7s cubic-bezier(.34,1.56,.64,1);}
+.pr-v{font-size:11px;color:var(--text2);min-width:52px;text-align:right;font-weight:600;}
+.sr{display:flex;justify-content:space-between;align-items:center;padding:4px 0;}
+.sr-l{font-size:12px;color:var(--text2);font-weight:600;}
+.sr-v{font-size:16px;font-weight:900;color:var(--text);}
+
+/* ══ GOAL ROWS ══ */
+.gr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.gr:last-child{border-bottom:none;}
+.gr-gbar{width:72px;height:5px;background:rgba(180,160,220,0.2);border-radius:99px;margin-top:5px;}
+.gr-gbf{height:5px;border-radius:99px;background:var(--mint);transition:width .6s;}
+
+/* ══ TOGGLE & REMINDER ROWS ══ */
+.tgl{width:42px;height:25px;background:var(--border2);border-radius:99px;position:relative;cursor:pointer;transition:background .25s;flex-shrink:0;}
+.tgl.on{background:var(--mint);}
+.tgl::after{content:'';position:absolute;width:19px;height:19px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .25s;box-shadow:0 1px 4px rgba(0,0,0,.15);}
+.tgl.on::after{left:20px;}
+.ri{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);}
+.ri:last-child{border-bottom:none;}
+
+/* ══ INFO PILLS ══ */
+.sci{display:flex;gap:10px;align-items:flex-start;padding:11px;background:rgba(255,255,255,0.55);border-radius:var(--rsm);margin-bottom:8px;border:1px solid var(--border);}
+.sci-ic{font-size:18px;flex-shrink:0;}
+.sci-tx{font-size:12px;color:var(--text2);line-height:1.65;font-weight:600;}
+.sci-tx strong{color:var(--text);font-weight:800;}
