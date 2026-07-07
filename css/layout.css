@@ -32,7 +32,7 @@
   background:linear-gradient(135deg,var(--mint),var(--lavender));
   display:flex;align-items:center;justify-content:center;font-size:26px;
   cursor:pointer;z-index:200;border:none;
-  box-shadow:0 4px 20px rgba(125,212,184,0.45);transition:all .2s;
+  box-shadow:0 4px 20px rgba(91,155,213,0.45);transition:all .2s;
 }
 .fab:active{transform:scale(.92);}
 .fab-pulse{position:absolute;inset:-4px;border-radius:50%;background:var(--mint);opacity:.25;animation:fabPulse 2s ease-in-out infinite;}

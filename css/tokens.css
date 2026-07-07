@@ -1,14 +1,14 @@
-/* ══ DESIGN TOKENS — pastel design system ══ */
+/* ══ DESIGN TOKENS — blue design system ══ */
 :root{
-  --mint:#7dd4b8;--mint2:#5cbda0;--mint-soft:#e8faf4;
-  --lavender:#b89de8;--lav-soft:#f0eaff;
-  --pink:#f0a0c8;--pink-soft:#fdeef6;
-  --peach:#f0c090;--peach-soft:#fff4e8;
+  --mint:#5b9bd5;--mint2:#3d7ab8;--mint-soft:#e6f2fc;
+  --lavender:#7ba7e8;--lav-soft:#eaf1fe;
+  --pink:#4ec3e0;--pink-soft:#e5f8fc;
+  --peach:#2f6fb0;--peach-soft:#e3edf8;
   --sky:#90c8f0;--sky-soft:#e8f4ff;
-  --text:#3d2d5a;--text2:#7a6490;--text3:#b0a0c8;
+  --text:#1f3a5f;--text2:#4d6d94;--text3:#93a8c4;
   --card:rgba(255,255,255,0.72);--card2:rgba(255,255,255,0.55);
-  --border:rgba(180,160,220,0.22);--border2:rgba(180,160,220,0.38);
-  --shadow:rgba(160,130,210,0.12);
+  --border:rgba(140,170,220,0.22);--border2:rgba(140,170,220,0.38);
+  --shadow:rgba(90,140,200,0.12);
   --r:18px;--rsm:12px;
   --safe-b:env(safe-area-inset-bottom,0px);
 }
