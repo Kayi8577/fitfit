@@ -1,4 +1,4 @@
-// Builds the pastel animated background scene (orbs, clouds, petals,
+// Builds the animated background scene (orbs, clouds, petals,
 // sparkles, rings, macaroon blobs) inside the given container.
 
 export function buildBackground(container) {
@@ -6,11 +6,11 @@ export function buildBackground(container) {
 
   // Glow orbs
   [
-    { w: 260, h: 200, t: '-5%', l: '-8%', bg: 'rgba(180,240,220,0.38)', dur: '5s', del: '0s' },
-    { w: 220, h: 180, t: '25%', r: '-6%', bg: 'rgba(210,185,255,0.32)', dur: '6.5s', del: '-2.5s' },
-    { w: 200, h: 160, b: '8%', l: '-5%', bg: 'rgba(255,210,235,0.35)', dur: '5.8s', del: '-1.2s' },
+    { w: 260, h: 200, t: '-5%', l: '-8%', bg: 'rgba(180,225,245,0.38)', dur: '5s', del: '0s' },
+    { w: 220, h: 180, t: '25%', r: '-6%', bg: 'rgba(180,200,250,0.32)', dur: '6.5s', del: '-2.5s' },
+    { w: 200, h: 160, b: '8%', l: '-5%', bg: 'rgba(190,225,250,0.35)', dur: '5.8s', del: '-1.2s' },
     { w: 170, h: 140, t: '55%', l: '22%', bg: 'rgba(185,225,255,0.3)', dur: '7s', del: '-3.5s' },
-    { w: 150, h: 130, t: '12%', l: '52%', bg: 'rgba(255,235,200,0.28)', dur: '4.8s', del: '-0.8s' },
+    { w: 150, h: 130, t: '12%', l: '52%', bg: 'rgba(200,215,245,0.28)', dur: '4.8s', del: '-0.8s' },
   ].forEach(o => {
     const d = document.createElement('div');
     d.className = 'orb';
@@ -59,7 +59,7 @@ export function buildBackground(container) {
   });
 
   // Petals
-  const petalColors = ['rgba(255,185,215,0.72)', 'rgba(240,200,255,0.68)', 'rgba(195,235,220,0.70)', 'rgba(255,215,195,0.65)', 'rgba(200,220,255,0.68)', 'rgba(255,230,210,0.70)'];
+  const petalColors = ['rgba(190,220,250,0.72)', 'rgba(195,210,250,0.68)', 'rgba(180,230,245,0.70)', 'rgba(170,205,240,0.65)', 'rgba(200,220,255,0.68)', 'rgba(190,215,245,0.70)'];
   for (let i = 0; i < 20; i++) {
     const p = document.createElement('div');
     p.className = 'petal';
@@ -69,7 +69,7 @@ export function buildBackground(container) {
   }
 
   // Sparkle dots
-  const sparkleColors = ['rgba(125,212,184,0.8)', 'rgba(184,157,232,0.75)', 'rgba(240,160,200,0.75)', 'rgba(144,200,240,0.75)', 'rgba(240,192,144,0.75)'];
+  const sparkleColors = ['rgba(91,155,213,0.8)', 'rgba(123,167,232,0.75)', 'rgba(78,195,224,0.75)', 'rgba(144,200,240,0.75)', 'rgba(47,111,176,0.75)'];
   [[6, '8%', '18%', 0], [5, '20%', '76%', 1], [7, '46%', '12%', 2], [5, '60%', '80%', 3], [6, '76%', '38%', 4], [5, '33%', '52%', 0], [6, '88%', '16%', 2], [5, '13%', '60%', 1], [4, '50%', '65%', 3]].forEach(([sz, top, left, ci], i) => {
     const d = document.createElement('div');
     d.className = 'sp-dot';
@@ -79,9 +79,9 @@ export function buildBackground(container) {
 
   // Rings
   [
-    { sz: 72, top: '13%', left: '66%', col: 'rgba(125,212,184,0.4)', dur: '4s' },
-    { sz: 52, top: '63%', left: '10%', col: 'rgba(184,157,232,0.38)', dur: '5.5s', del: '-1.5s' },
-    { sz: 40, top: '40%', left: '76%', col: 'rgba(240,160,200,0.38)', dur: '3.8s', del: '-.8s' },
+    { sz: 72, top: '13%', left: '66%', col: 'rgba(91,155,213,0.4)', dur: '4s' },
+    { sz: 52, top: '63%', left: '10%', col: 'rgba(123,167,232,0.38)', dur: '5.5s', del: '-1.5s' },
+    { sz: 40, top: '40%', left: '76%', col: 'rgba(78,195,224,0.38)', dur: '3.8s', del: '-.8s' },
   ].forEach(r => {
     const d = document.createElement('div');
     d.className = 'soft-ring';
@@ -91,11 +91,11 @@ export function buildBackground(container) {
 
   // Macaroon circles
   const macColors = [
-    { bg: 'rgba(125,212,184,0.45)', b: 'rgba(90,188,158,0.5)' },
-    { bg: 'rgba(184,157,232,0.38)', b: 'rgba(148,117,208,0.48)' },
-    { bg: 'rgba(240,160,200,0.38)', b: 'rgba(204,120,168,0.48)' },
+    { bg: 'rgba(91,155,213,0.45)', b: 'rgba(61,122,184,0.5)' },
+    { bg: 'rgba(123,167,232,0.38)', b: 'rgba(90,130,210,0.48)' },
+    { bg: 'rgba(78,195,224,0.38)', b: 'rgba(40,160,190,0.48)' },
     { bg: 'rgba(144,200,240,0.38)', b: 'rgba(100,164,210,0.45)' },
-    { bg: 'rgba(240,192,144,0.38)', b: 'rgba(204,152,100,0.45)' },
+    { bg: 'rgba(47,111,176,0.38)', b: 'rgba(30,80,140,0.45)' },
   ];
   [[28, '78%', '5%', 0, 4], [22, '6%', '80%', 1, 5], [24, '66%', '70%', 2, 6], [18, '28%', '5%', 3, 3.5], [16, '90%', '52%', 4, 5.5]].forEach(([sz, top, left, mi, dur], i) => {
     const d = document.createElement('div');

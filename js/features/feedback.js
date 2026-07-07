@@ -20,7 +20,7 @@ export function showXPPop(emoji, title, subtitle, amount) {
 }
 
 export function confetti() {
-  ['#7dd4b8', '#b89de8', '#f0a0c8', '#90c8f0', '#f0c090'].forEach(color => {
+  ['#5b9bd5', '#7ba7e8', '#4ec3e0', '#90c8f0', '#2f6fb0'].forEach(color => {
     for (let j = 0; j < 4; j++) {
       const el = document.createElement('div');
       el.className = 'cf';

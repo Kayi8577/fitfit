@@ -73,7 +73,7 @@ export function renderWeekDots() {
 export function renderWeekChart() {
   const max = Math.max(...state.weekMins, 1);
   $('week-chart').innerHTML = state.weekMins.map((v, i) =>
-    `<div class="wb"><div class="wb-bar" style="height:${Math.round(v / max * 56)}px;background:${v > 0 ? 'var(--mint)' : 'rgba(180,160,220,0.18)'}"></div><div class="wb-day">${DAYS[i]}</div></div>`
+    `<div class="wb"><div class="wb-bar" style="height:${Math.round(v / max * 56)}px;background:${v > 0 ? 'var(--mint)' : 'rgba(140,170,220,0.18)'}"></div><div class="wb-day">${DAYS[i]}</div></div>`
   ).join('');
 }
 

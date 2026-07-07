@@ -2,7 +2,7 @@
 #bg-canvas{
   position:fixed;inset:0;z-index:0;
   overflow:hidden;pointer-events:none;
-  background:linear-gradient(145deg,#e8faf4 0%,#f0eaff 28%,#fce8f5 55%,#e8f4ff 78%,#f5ffe8 100%);
+  background:linear-gradient(145deg,#e6f2fc 0%,#eaf1fe 28%,#e5f8fc 55%,#e8f4ff 78%,#e3edf8 100%);
 }
 
 /* Soft glow orbs */
