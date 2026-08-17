@@ -2,12 +2,12 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="FitFit">
 <meta name="application-name" content="FitFit">
-<meta name="theme-color" content="#e8faf4">
+<meta name="theme-color" content="#e6f2fc">
 <title>FitFit ✨</title>
 
 <link rel="manifest" href="manifest.webmanifest">
@@ -39,9 +39,9 @@
   <div class="cam-ui">
     <div class="cam-header">
       <div class="cam-title">📸 拍照識別卡路里</div>
-      <div class="cam-sub">AI 秒速分析 · 薄荷馬卡龍時光 🍃</div>
+      <div class="cam-sub">AI 秒速分析 · 上傳照片立即算熱量</div>
     </div>
-    <div class="cam-frame" id="cam-frame" data-action="triggerUpload">
+    <div class="cam-frame" id="cam-frame" data-action="triggerUpload" role="button" tabindex="0" aria-label="上傳食物照片">
       <div class="cam-corner tl"></div><div class="cam-corner tr"></div>
       <div class="cam-corner bl"></div><div class="cam-corner br"></div>
       <div class="cam-scan"></div>
@@ -67,12 +67,12 @@
 </button>
 
 <!-- ══ BOTTOM NAV ══ -->
-<nav class="bnav">
-  <div class="ni active" data-action="navigate" data-section="home"><div class="ni-ic">🏠</div><div class="ni-lb">首頁</div></div>
-  <div class="ni" data-action="navigate" data-section="food"><div class="ni-ic">🥗</div><div class="ni-lb">飲食</div></div>
-  <div class="ni" data-action="navigate" data-section="plan"><div class="ni-ic">📅</div><div class="ni-lb">計畫</div></div>
-  <div class="ni" data-action="navigate" data-section="videos"><div class="ni-ic">▶️</div><div class="ni-lb">影片</div></div>
-  <div class="ni" data-action="navigate" data-section="more"><div class="ni-ic">⚙️</div><div class="ni-lb">更多</div></div>
+<nav class="bnav" aria-label="主導覽">
+  <button class="ni active" data-action="navigate" data-section="home" aria-current="page"><div class="ni-ic" aria-hidden="true">🏠</div><div class="ni-lb">首頁</div></button>
+  <button class="ni" data-action="navigate" data-section="food"><div class="ni-ic" aria-hidden="true">🥗</div><div class="ni-lb">飲食</div></button>
+  <button class="ni" data-action="navigate" data-section="plan"><div class="ni-ic" aria-hidden="true">📅</div><div class="ni-lb">計畫</div></button>
+  <button class="ni" data-action="navigate" data-section="videos"><div class="ni-ic" aria-hidden="true">▶️</div><div class="ni-lb">影片</div></button>
+  <button class="ni" data-action="navigate" data-section="more"><div class="ni-ic" aria-hidden="true">⚙️</div><div class="ni-lb">更多</div></button>
 </nav>
 
 <div class="app">
@@ -91,7 +91,7 @@
   </div>
   <div style="height:18px"></div>
 
-  <div class="snap-cta" data-action="openCam">
+  <div class="snap-cta" data-action="openCam" role="button" tabindex="0" aria-label="開啟拍照識別卡路里">
     <div class="snap-cta-row">
       <div class="snap-icon-wrap">📷</div>
       <div><div class="snap-title">拍照識別卡路里</div><div class="snap-sub">AI 秒速分析 · 比手動快10倍 · 支援台灣料理</div></div>
@@ -103,10 +103,10 @@
   </div>
 
   <div class="sgrid">
-    <div class="stat"><div class="stat-glow" style="background:var(--mint)"></div><div class="stat-lb">今日攝入</div><div><span class="stat-val" id="s-cal">0</span><span class="stat-u"> kcal</span></div><div class="stat-bar"><div class="stat-bf" id="s-cal-b" style="width:0%;background:var(--mint)"></div></div></div>
+    <div class="stat"><div class="stat-glow" style="background:var(--primary)"></div><div class="stat-lb">今日攝入</div><div><span class="stat-val" id="s-cal">0</span><span class="stat-u"> kcal</span></div><div class="stat-bar"><div class="stat-bf" id="s-cal-b" style="width:0%;background:var(--primary)"></div></div></div>
     <div class="stat"><div class="stat-glow" style="background:var(--sky)"></div><div class="stat-lb">運動消耗</div><div><span class="stat-val" id="s-burn">0</span><span class="stat-u"> kcal</span></div><div class="stat-bar"><div class="stat-bf" id="s-burn-b" style="width:0%;background:var(--sky)"></div></div></div>
     <div class="stat"><div class="stat-glow" style="background:var(--lavender)"></div><div class="stat-lb">睡眠</div><div><span class="stat-val" id="s-sleep">-</span><span class="stat-u"> 小時</span></div><div class="stat-bar"><div class="stat-bf" id="s-sleep-b" style="width:0%;background:var(--lavender)"></div></div></div>
-    <div class="stat"><div class="stat-glow" style="background:var(--peach)"></div><div class="stat-lb">本週運動</div><div><span class="stat-val" id="s-ex">0</span><span class="stat-u">/<span id="s-ex-g">3</span></span></div><div class="stat-bar"><div class="stat-bf" id="s-ex-b" style="width:0%;background:var(--peach)"></div></div></div>
+    <div class="stat"><div class="stat-glow" style="background:var(--navy)"></div><div class="stat-lb">本週運動</div><div><span class="stat-val" id="s-ex">0</span><span class="stat-u">/<span id="s-ex-g">3</span></span></div><div class="stat-bar"><div class="stat-bf" id="s-ex-b" style="width:0%;background:var(--navy)"></div></div></div>
   </div>
 
   <div class="card">
@@ -119,16 +119,18 @@
   </div>
 
   <div class="card">
-    <div class="ct">今日飲食 <span class="ct-link" data-action="openCam">+ 拍照新增</span></div>
+    <div class="ct">今日飲食 <button class="ct-link" data-action="openCam">+ 拍照新增</button></div>
     <div id="home-food-list"><div class="empty" style="padding:12px">還沒有記錄，點上方拍照！</div></div>
     <hr>
     <div class="pr"><div class="pr-l">目標</div><div class="pr-bg"><div class="pr-f" style="width:100%;background:rgba(125,212,184,0.25)"></div></div><div class="pr-v" id="h-gcal">1800 kcal</div></div>
-    <div class="pr"><div class="pr-l">已吃</div><div class="pr-bg"><div class="pr-f" id="h-pf" style="width:0%;background:var(--mint)"></div></div><div class="pr-v" id="h-pfv">0 kcal</div></div>
+    <div class="pr"><div class="pr-l">已吃</div><div class="pr-bg"><div class="pr-f" id="h-pf" style="width:0%;background:var(--primary)"></div></div><div class="pr-v" id="h-pfv">0 kcal</div></div>
     <hr>
     <div class="sr"><div class="sr-l">淨缺口（目標 ≥400）</div><div class="sr-v" id="h-def" style="color:var(--text2)">—</div></div>
   </div>
 
   <div class="card"><div class="ct">本週運動（分鐘）</div><div class="week-chart" id="week-chart"></div></div>
+
+  <div class="card"><div class="ct">近 7 天攝取熱量</div><div class="week-chart" id="hist-chart"></div><div class="note">超過每日目標的日子會以青色標示</div></div>
 
   <div class="card">
     <div class="ct">體重記錄</div>
@@ -141,7 +143,7 @@
 <div id="food" class="sec">
   <div class="hdr"><div class="ct-big">飲食記錄</div><div style="font-size:12px;color:var(--text2);margin-top:4px;font-weight:700">拍照或手動記錄</div></div>
   <div style="height:16px"></div>
-  <div class="snap-cta" data-action="openCam" style="text-align:center;padding:22px">
+  <div class="snap-cta" data-action="openCam" role="button" tabindex="0" aria-label="開啟拍照識別卡路里" style="text-align:center;padding:22px">
     <div style="font-size:48px;margin-bottom:8px">📸</div>
     <div class="snap-title" style="margin-bottom:4px">拍照識別卡路里</div>
     <div class="snap-sub" style="margin-bottom:14px">上傳食物照片 → AI 自動計算熱量</div>
@@ -156,7 +158,7 @@
     <button class="btn-p" data-action="addFood" style="margin-top:4px">新增 +10 XP</button>
   </div>
   <div class="card">
-    <div class="ct">今日飲食 <span class="ct-link" data-action="openCam">+ 拍照</span></div>
+    <div class="ct">今日飲食 <button class="ct-link" data-action="openCam">+ 拍照</button></div>
     <div id="food-log-list"><div class="empty">尚無記錄，拍張照片開始！</div></div>
     <hr>
     <div class="sr"><div class="sr-l">總熱量</div><div class="sr-v" id="food-tot">0 kcal</div></div>
@@ -176,9 +178,9 @@
   <div style="height:16px"></div>
   <div class="card"><div class="ct">選擇階段</div><div class="pph" id="phase-pills"></div><div style="font-size:12px;color:var(--text2);line-height:1.65;font-weight:700" id="phase-desc"></div></div>
   <div class="card">
-    <div class="ct">本週排程 <span style="color:var(--mint2);font-size:10px;font-weight:800" id="wk-g-lbl"></span></div>
+    <div class="ct">本週排程 <span style="color:var(--primary-deep);font-size:10px;font-weight:800" id="wk-g-lbl"></span></div>
     <div class="wkplan" id="wk-plan"></div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--text3);font-weight:800"><span>✅ 完成</span><span style="color:var(--mint2)">⬤ 今天</span><span>💜 休息</span></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:10px;color:var(--text3);font-weight:800"><span>✅ 完成</span><span style="color:var(--primary-deep)">⬤ 今天</span><span>💜 休息</span></div>
   </div>
   <div class="card"><div class="ct" id="today-wk-lbl">今日任務</div><div id="today-wk-detail"></div></div>
   <div class="card">
@@ -192,7 +194,7 @@
   </div>
   <div class="card">
     <div class="ct">瀏覽課表</div>
-    <div class="ltabs"><div class="lt active" data-action="setLevel" data-level="easy">初階 🌱</div><div class="lt" data-action="setLevel" data-level="medium">中階 🌿</div><div class="lt" data-action="setLevel" data-level="hard">進階 🌳</div></div>
+    <div class="ltabs"><button class="lt active" data-action="setLevel" data-level="easy" aria-pressed="true">初階 🌱</button><button class="lt" data-action="setLevel" data-level="medium" aria-pressed="false">中階 🌿</button><button class="lt" data-action="setLevel" data-level="hard" aria-pressed="false">進階 🌳</button></div>
     <div id="all-wks"></div>
   </div>
 </div>
@@ -226,17 +228,19 @@
     <div class="fr"><label>體重</label><input type="number" id="bmi-w" placeholder="kg" inputmode="decimal"></div>
     <div class="fr"><label>年齡</label><input type="number" id="bmi-age" placeholder="歲" inputmode="numeric"></div>
     <div class="fr"><label>性別</label><select id="bmi-sex"><option value="m">男</option><option value="f">女</option></select></div>
+    <div class="fr"><label>活動量</label><select id="bmi-act"><option value="sedentary">久坐（幾乎不運動）</option><option value="light">輕度（每週1-3次）</option><option value="moderate" selected>中度（每週3-5次）</option><option value="active">高度（每週6-7次）</option></select></div>
     <button class="btn-p" data-action="calcBMI" style="margin-top:4px">計算 +20 XP</button>
     <div id="bmi-res" style="display:none;margin-top:12px">
       <div class="bmi-num" id="bmi-val">—</div><div class="bmi-cat" id="bmi-cat"></div>
-      <div class="bmi-scale"><div style="background:var(--sky);flex:1.5"></div><div style="background:var(--mint);flex:1.1"></div><div style="background:var(--peach);flex:1"></div><div style="background:var(--pink);flex:1.5"></div></div>
+      <div class="bmi-scale"><div style="background:var(--sky);flex:1.5"></div><div style="background:var(--primary);flex:1.1"></div><div style="background:var(--navy);flex:1"></div><div style="background:var(--cyan);flex:1.5"></div></div>
       <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-bottom:4px;font-weight:800"><span>偏輕</span><span>正常</span><span>過重</span><span>肥胖</span></div>
       <div class="bmi-mkr"><div class="bmi-ptr" id="bmi-ptr">▲</div></div>
       <hr>
       <div style="font-size:13px;color:var(--text2);line-height:1.9;font-weight:700">
         <div>每日建議熱量（TDEE）：<strong id="tdee-lbl" style="color:var(--text)">—</strong></div>
-        <div>減脂建議攝入（-20%）：<strong id="cut-lbl" style="color:var(--mint2)">—</strong></div>
+        <div>減脂建議攝入（-20%）：<strong id="cut-lbl" style="color:var(--primary-deep)">—</strong></div>
       </div>
+      <div class="note">計算結果僅供參考，非醫療建議；有健康疑慮請諮詢醫師或營養師。</div>
     </div>
   </div>
 
@@ -255,9 +259,34 @@
     <div class="fr"><label>內容</label><input type="text" id="r-msg" placeholder="例如：午餐記得拍照記錄！"></div>
     <button class="btn-s btn-sm" data-action="addReminder" style="margin-bottom:12px">新增提醒</button>
     <div id="remind-list"></div>
+    <div class="note">提醒會在 App 開啟時發出通知；關閉頁面後不會提醒（純前端 App 無推播伺服器）。</div>
   </div>
 
   <div class="card"><div class="ct">成就徽章</div><div class="bdgrid" id="badge-grid"></div></div>
+
+  <div class="card">
+    <div class="ct">AI 設定</div>
+    <div class="fr"><label>API Key</label><input type="password" id="set-api-key" placeholder="sk-ant-…" autocomplete="off"></div>
+    <button class="btn-s btn-sm" data-action="saveAiKey">儲存</button>
+    <div class="note">Key 只儲存在此裝置的瀏覽器中，不會進入備份或上傳到任何地方。填入後即可使用拍照識別與 AI 建議。</div>
+  </div>
+
+  <div class="card">
+    <div class="ct">資料備份</div>
+    <div style="display:flex;gap:8px;margin-bottom:12px">
+      <button class="btn-s btn-sm" data-action="exportData" style="flex:1">⬇ 匯出 JSON</button>
+      <button class="btn-s btn-sm" data-action="triggerImport" style="flex:1">⬆ 匯入 JSON</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json,.json" style="display:none">
+    <hr>
+    <div class="fr"><label>Client ID</label><input type="text" id="set-gdrive-id" placeholder="xxxx.apps.googleusercontent.com" autocomplete="off"></div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button class="btn-s btn-sm" data-action="driveBackup" style="flex:1">☁️ 備份到 Drive</button>
+      <button class="btn-s btn-sm" data-action="driveRestore" style="flex:1">📥 從 Drive 還原</button>
+    </div>
+    <div class="note" id="drive-status">尚未備份過</div>
+    <div class="note">備份存於 Google Drive 的隱藏應用程式資料夾（其他 App 與 Drive 介面都看不到）。需先在 Google Cloud Console 建立 OAuth Client ID，設定步驟見 README。API Key 不會被備份。</div>
+  </div>
 
   <div class="card">
     <div class="ct">AI 個人建議</div>
@@ -266,12 +295,14 @@
     <button class="btn-s" data-action="askCoach" style="margin-top:4px">獲取 AI 建議 ↗</button>
     <div id="ai-out" style="margin-top:12px"></div>
   </div>
+
+  <div class="note" style="text-align:center;padding:4px 20px 12px">FitFit 提供的所有熱量估算與建議僅供參考，非醫療建議。</div>
 </div>
 
 </div></div><!-- content / app -->
 
-<div class="xppop" id="xppop"><span class="xp-em" id="xp-em">🎉</span><div class="xp-t" id="xp-t">完成！</div><div class="xp-s" id="xp-s"></div><div class="xp-x" id="xp-x">+50 XP</div></div>
-<div class="toast" id="toast"></div>
+<div class="xppop" id="xppop" role="status" aria-live="polite"><span class="xp-em" id="xp-em">🎉</span><div class="xp-t" id="xp-t">完成！</div><div class="xp-s" id="xp-s"></div><div class="xp-x" id="xp-x">+50 XP</div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script type="module" src="js/main.js"></script>
 </body>

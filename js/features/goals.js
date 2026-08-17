@@ -2,13 +2,18 @@
 
 import { state } from '../core/state.js';
 import { bus } from '../core/events.js';
-import { $ } from '../utils/dom.js';
+import { $, numVal } from '../utils/dom.js';
+import { dateKey } from '../utils/time.js';
 import { toast } from './feedback.js';
 
 export function saveGoals() {
-  state.goals.ex = parseInt($('g-ex').value) || 3;
-  state.goals.cal = parseInt($('g-cal').value) || 1800;
-  state.goals.sleep = parseFloat($('g-sleep').value) || 7.5;
+  state.goals.ex = Math.round(numVal('g-ex', { min: 1, max: 7, def: 3 }));
+  state.goals.cal = Math.round(numVal('g-cal', { min: 800, max: 6000, def: 1800 }));
+  state.goals.sleep = numVal('g-sleep', { min: 4, max: 14, def: 7.5 });
+  // Reflect any clamping back into the inputs so what you see is what saved.
+  $('g-ex').value = state.goals.ex;
+  $('g-cal').value = state.goals.cal;
+  $('g-sleep').value = state.goals.sleep;
   toast('✓ 目標已儲存');
   bus.emit('state:changed');
 }
@@ -16,10 +21,10 @@ export function saveGoals() {
 export function renderGoalProgress() {
   const exCount = state.weekDone.filter(Boolean).length;
   const totalCal = state.foodLogs.reduce((a, b) => a + b.cal, 0);
-  const sleep = state.sleepLogs[0]?.hours || 0;
+  const sleep = state.sleepLogs.find(s => s.date === dateKey())?.hours || 0;
   const rows = [
-    { l: '本週運動', d: exCount, t: state.goals.ex, u: '次', c: 'var(--mint)' },
-    { l: '飲食達標', d: (totalCal > 0 && totalCal <= state.goals.cal) ? 1 : 0, t: 1, u: '天', c: 'var(--peach)' },
+    { l: '本週運動', d: exCount, t: state.goals.ex, u: '次', c: 'var(--primary)' },
+    { l: '飲食達標', d: (totalCal > 0 && totalCal <= state.goals.cal) ? 1 : 0, t: 1, u: '天', c: 'var(--navy)' },
     { l: '睡眠充足', d: sleep >= state.goals.sleep ? 1 : 0, t: 1, u: '天', c: 'var(--lavender)' },
   ];
   $('goal-prog').innerHTML = rows.map(r =>
