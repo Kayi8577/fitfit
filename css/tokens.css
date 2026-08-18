@@ -1,9 +1,9 @@
 /* ══ DESIGN TOKENS — blue design system ══ */
 :root{
-  --mint:#5b9bd5;--mint2:#3d7ab8;--mint-soft:#e6f2fc;
+  --primary:#5b9bd5;--primary-deep:#3d7ab8;--primary-soft:#e6f2fc;
   --lavender:#7ba7e8;--lav-soft:#eaf1fe;
-  --pink:#4ec3e0;--pink-soft:#e5f8fc;
-  --peach:#2f6fb0;--peach-soft:#e3edf8;
+  --cyan:#4ec3e0;--cyan-soft:#e5f8fc;
+  --navy:#2f6fb0;--navy-soft:#e3edf8;
   --sky:#90c8f0;--sky-soft:#e8f4ff;
   --text:#1f3a5f;--text2:#4d6d94;--text3:#93a8c4;
   --card:rgba(255,255,255,0.72);--card2:rgba(255,255,255,0.55);
