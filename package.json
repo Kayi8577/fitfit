@@ -1,6 +1,6 @@
 {
   "name": "fitfit",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "description": "拍照識別卡路里的健康管理 PWA — blue fitness tracker",
   "type": "module",

@@ -66,6 +66,7 @@ fitfit/
 | I want to… | Edit |
 |---|---|
 | Change colors / theme | `css/tokens.css` |
+| Add a food to the autocomplete DB | `js/data/foods.js` (name, kcal, protein, meal type, emoji) |
 | Add a workout phase or exercise | `js/data/phases.js` |
 | Add a recommended video | `js/data/videos.js` (set `cats` for the category tabs) |
 | Add an achievement badge | `js/data/badges.js` (icon + condition; UI updates automatically) |
@@ -93,6 +94,22 @@ Notes:
   shows a hint instead of burning a doomed request.
 - If the model's reply can't be parsed, the app falls back to manual entry —
   it never fabricates nutrition numbers.
+- The coach prompt includes a 7-day context (daily intake/burn history,
+  weight trend, sleep average, weekly training) built by
+  `buildCoachContext()` in `js/features/coach.js`, so advice references
+  actual trends instead of a single day.
+
+## Food logging conveniences
+
+- **Autocomplete**: 手動新增 suggests from a built-in Taiwan food database
+  (`js/data/foods.js`, ~120 items); picking a name autofills kcal/protein/meal.
+- **常吃的 quick log**: every logged food updates a frequency map
+  (`state.foodFreq`); the top 8 appear as one-tap chips in the 飲食 tab.
+- **餐盤相簿**: photo-logged meals keep a small thumbnail (~96px JPEG) in a
+  persistent album (last 60, survives the daily log reset). Thumbnails also
+  show in the day's food list. Deleting a same-day entry removes its album copy.
+- **體重趨勢**: the home weight card charts daily weigh-ins with a 7-day
+  moving average and the change vs a week ago.
 
 ## Data, backup & privacy
 

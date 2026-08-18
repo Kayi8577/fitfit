@@ -34,3 +34,26 @@ export function clampNum(value, min, max, def = 0) {
   if (!Number.isFinite(n)) return def;
   return Math.min(max, Math.max(min, n));
 }
+
+// Collapse dated entries ({date:'YYYY-MM-DD', v}) to one point per day —
+// the day's LAST entry wins (you weigh in, then correct a typo).
+// Undated (v1) entries are dropped. Result is sorted by date ascending.
+export function dailyLast(entries) {
+  const byDate = new Map();
+  (entries || []).forEach(e => {
+    if (e && typeof e.v === 'number' && /^\d{4}-\d{2}-\d{2}$/.test(e.date || '')) byDate.set(e.date, e.v);
+  });
+  return [...byDate.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([date, v]) => ({ date, v }));
+}
+
+// Trailing moving average: point i averages the last `window` values up to
+// and including i (the window grows from 1 at the start of the series).
+export function movingAverage(values, window = 7) {
+  return (values || []).map((_, i) => {
+    const slice = values.slice(Math.max(0, i - window + 1), i + 1);
+    const avg = slice.reduce((a, b) => a + b, 0) / slice.length;
+    return Math.round(avg * 100) / 100;
+  });
+}

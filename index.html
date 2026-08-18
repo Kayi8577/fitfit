@@ -134,6 +134,8 @@
 
   <div class="card">
     <div class="ct">體重記錄</div>
+    <div id="wt-hero"></div>
+    <div id="wt-chart"></div>
     <div class="fr"><label>今日體重</label><input type="number" id="wt-in" placeholder="kg" step="0.1" inputmode="decimal"><button class="btn-p btn-sm" data-action="saveWeight">記錄</button></div>
     <div class="wt-hist" id="wt-hist"></div>
   </div>
@@ -150,8 +152,12 @@
     <div class="snap-tags" style="justify-content:center"><span class="chip cm">✓ 台式便當</span><span class="chip cs">✓ 日式料理</span><span class="chip cl">✓ 火鍋燒烤</span><span class="chip cp">✓ 麵食點心</span></div>
   </div>
   <div class="card">
-    <div class="ct">手動新增</div>
-    <div class="fr"><label>食物名稱</label><input type="text" id="food-name" placeholder="例如：雞腿便當"></div>
+    <div class="ct">常吃的 · 一鍵記錄</div>
+    <div class="freq-wrap" id="freq-foods"></div>
+  </div>
+  <div class="card">
+    <div class="ct">手動新增 <span style="font-size:10px;color:var(--text3);font-weight:700">輸入名稱自動帶入熱量</span></div>
+    <div class="fr"><label>食物名稱</label><input type="text" id="food-name" placeholder="例如：雞腿便當" list="food-dl" autocomplete="off"><datalist id="food-dl"></datalist></div>
     <div class="fr"><label>熱量</label><input type="number" id="food-cal" placeholder="kcal" inputmode="numeric"></div>
     <div class="fr"><label>蛋白質</label><input type="number" id="food-pro" placeholder="g（選填）" inputmode="decimal"></div>
     <div class="fr"><label>類別</label><select id="food-type"><option>早餐</option><option>午餐</option><option>晚餐</option><option>點心</option></select></div>
@@ -163,6 +169,10 @@
     <hr>
     <div class="sr"><div class="sr-l">總熱量</div><div class="sr-v" id="food-tot">0 kcal</div></div>
     <div class="sr" style="margin-top:5px"><div class="sr-l">蛋白質</div><div class="sr-v" style="color:var(--sky)" id="food-pro-tot">0 g</div></div>
+  </div>
+  <div class="card">
+    <div class="ct">📸 餐盤相簿 <span style="font-size:10px;color:var(--text3);font-weight:700">最近 60 筆拍照記錄</span></div>
+    <div class="alb-grid" id="photo-album"></div>
   </div>
   <div class="card">
     <div class="ct">間歇性斷食</div>

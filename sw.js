@@ -1,6 +1,6 @@
 // FitFit service worker: precache the app shell, serve same-origin requests
 // stale-while-revalidate. Bump VERSION on every release to invalidate.
-const VERSION = 'fitfit-v2.0.0';
+const VERSION = 'fitfit-v2.1.0';
 
 const PRECACHE = [
   '.',
@@ -26,6 +26,7 @@ const PRECACHE = [
   'js/core/storage.js',
   'js/core/events.js',
   'js/data/badges.js',
+  'js/data/foods.js',
   'js/data/levels.js',
   'js/data/phases.js',
   'js/data/videos.js',

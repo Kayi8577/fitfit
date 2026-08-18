@@ -6,6 +6,7 @@ import { PHASES } from '../data/phases.js';
 import { state } from '../core/state.js';
 import { bus } from '../core/events.js';
 import { $, esc, numVal } from '../utils/dom.js';
+import { dailyLast, movingAverage } from '../utils/health.js';
 import { DAYS, todayIndex, dateKey, shortLabel } from '../utils/time.js';
 import { addXP, removeXP } from './gamification.js';
 import { toast } from './feedback.js';
@@ -108,6 +109,95 @@ export function deleteWeight(index) {
   removeXP(entry.xp || 0);
   toast('已刪除記錄');
   bus.emit('state:changed');
+}
+
+// ── Weight trend chart ──────────────────────────────────
+// Raw daily weigh-ins (dots + faint line) with a 7-day trailing average
+// (solid line) — the average is what actually shows fat-loss progress,
+// since day-to-day weight is mostly water noise.
+
+const CW = 320, CH = 132, PT = 14, PR = 36, PB = 18, PL = 8;
+
+function deltaVs7Days(series) {
+  const cur = series[series.length - 1];
+  const cutoff = new Date(cur.date + 'T00:00');
+  cutoff.setDate(cutoff.getDate() - 7);
+  const cutKey = dateKey(cutoff);
+  // Latest point at least 7 days old; fall back to the earliest record.
+  const base = [...series].reverse().find(p => p.date <= cutKey) || series[0];
+  return base === cur ? null : { diff: Math.round((cur.v - base.v) * 10) / 10, since: shortLabel(base.date) };
+}
+
+export function renderWeightChart() {
+  const hero = $('wt-hero');
+  const box = $('wt-chart');
+  const series = dailyLast(state.weightHistory).slice(-30);
+
+  if (!series.length) { hero.innerHTML = ''; box.innerHTML = ''; return; }
+
+  const cur = series[series.length - 1];
+  const delta = deltaVs7Days(series);
+  const deltaHtml = delta
+    ? `<span class="wt-hero-d" style="color:${delta.diff <= 0 ? 'var(--primary-deep)' : 'var(--cyan)'}">${delta.diff > 0 ? '+' : ''}${delta.diff} kg <span style="color:var(--text3)">自${delta.since}</span></span>`
+    : '';
+  hero.innerHTML = `<div class="wt-hero"><span class="wt-hero-v">${cur.v}</span><span class="wt-hero-u">kg</span>${deltaHtml}</div>`;
+
+  if (series.length < 2) {
+    box.innerHTML = '<div class="empty" style="padding:8px">再記錄幾天就能看到趨勢曲線</div>';
+    return;
+  }
+
+  const values = series.map(p => p.v);
+  const ma = movingAverage(values, 7);
+  const lo = Math.min(...values, ...ma), hi = Math.max(...values, ...ma);
+  const pad = Math.max(0.4, (hi - lo) * 0.12);
+  const vmin = lo - pad, vmax = hi + pad;
+  const x = i => PL + i * (CW - PL - PR) / (series.length - 1);
+  const y = v => PT + (vmax - v) / (vmax - vmin) * (CH - PT - PB);
+  const fmt = v => Math.round(v * 10) / 10;
+
+  const gridLevels = [vmin + pad, (vmin + vmax) / 2, vmax - pad];
+  const grid = gridLevels.map(v =>
+    `<line x1="${PL}" x2="${CW - PR}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(140,170,220,0.25)" stroke-width="1"/>` +
+    `<text x="${CW - PR + 4}" y="${y(v) + 3}" font-size="9" font-weight="700" fill="var(--text3)">${fmt(v)}</text>`
+  ).join('');
+
+  const mid = Math.floor((series.length - 1) / 2);
+  const xLabels = [0, mid, series.length - 1].filter((v, i, a) => a.indexOf(v) === i).map(i =>
+    `<text x="${x(i)}" y="${CH - 5}" font-size="9" font-weight="700" fill="var(--text3)" text-anchor="middle">${shortLabel(series[i].date)}</text>`
+  ).join('');
+
+  const rawPts = series.map((p, i) => `${x(i)},${y(p.v)}`).join(' ');
+  const dots = series.map((p, i) =>
+    `<circle cx="${x(i)}" cy="${y(p.v)}" r="${i === series.length - 1 ? 3.5 : 2.6}" fill="var(--primary)"/>`
+  ).join('');
+  const maPts = ma.map((v, i) => `${x(i)},${y(v)}`).join(' ');
+  const lastLabel = `<text x="${x(series.length - 1)}" y="${y(cur.v) - 8}" font-size="10" font-weight="800" fill="var(--text)" text-anchor="end">${cur.v}</text>`;
+
+  box.innerHTML = `<div class="wt-chart-box">
+    <svg viewBox="0 0 ${CW} ${CH}" role="img" aria-label="體重趨勢圖：目前${cur.v}公斤">
+      ${grid}${xLabels}
+      <polyline points="${rawPts}" fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.45"/>
+      <polyline points="${maPts}" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      ${dots}${lastLabel}
+    </svg>
+    <div class="wt-tip" id="wt-tip"></div>
+    <div class="wt-legend"><span><span class="wt-lg-dot"></span>每日體重</span><span><span class="wt-lg-line"></span>7日平均</span></div>
+  </div>`;
+
+  // Tap/hover a point → tooltip with date + exact value.
+  const svg = box.querySelector('svg');
+  const tip = $('wt-tip');
+  svg.addEventListener('pointermove', e => {
+    const rect = svg.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width * CW;
+    const i = Math.max(0, Math.min(series.length - 1, Math.round((px - PL) / ((CW - PL - PR) / (series.length - 1)))));
+    tip.style.display = 'block';
+    tip.style.left = x(i) / CW * 100 + '%';
+    tip.style.top = y(series[i].v) / CH * 100 + '%';
+    tip.textContent = `${shortLabel(series[i].date)} · ${series[i].v}kg（7日均 ${fmt(ma[i])}）`;
+  });
+  svg.addEventListener('pointerleave', () => { tip.style.display = 'none'; });
 }
 
 export function renderWeightHistory() {

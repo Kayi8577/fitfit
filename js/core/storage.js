@@ -22,6 +22,8 @@ export function exportSnapshot() {
     sleepLogs: state.sleepLogs,
     weightHistory: state.weightHistory,
     history: state.history,
+    foodFreq: state.foodFreq,
+    photoAlbum: state.photoAlbum,
     goals: state.goals,
     hasBMI: state.hasBMI,
     profile: state.profile,
@@ -68,6 +70,8 @@ export function hydrate(d) {
   state.sleepLogs = d.sleepLogs || [];
   state.weightHistory = d.weightHistory || [];
   state.history = d.history || [];
+  state.foodFreq = d.foodFreq || {};
+  state.photoAlbum = d.photoAlbum || [];
   state.goals = { ...state.goals, ...(d.goals || {}) };
   state.hasBMI = d.hasBMI || false;
   state.profile = { ...state.profile, ...(d.profile || {}) };

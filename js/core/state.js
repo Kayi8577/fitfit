@@ -20,6 +20,8 @@ export const state = {
   sleepLogs: [],
   weightHistory: [],
   history: [],                       // per-day summaries {date, cal, burn}, appended at rollover
+  foodFreq: {},                      // name → {count, lastUsed, cal, pro, type, icon} for quick re-logging
+  photoAlbum: [],                    // meal photo history {id, date, thumb, name, cal}, capped
 
   // Settings
   goals: { ex: 3, cal: 1800, sleep: 7.5 },

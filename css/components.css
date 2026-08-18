@@ -96,3 +96,26 @@
 .sci-ic{font-size:18px;flex-shrink:0;}
 .sci-tx{font-size:12px;color:var(--text2);line-height:1.65;font-weight:600;}
 .sci-tx strong{color:var(--text);font-weight:800;}
+
+/* ══ QUICK-LOG FREQUENT FOODS ══ */
+.freq-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.freq-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:inherit;font-size:12px;font-weight:800;color:var(--text);
+  background:rgba(255,255,255,0.72);border:1.5px solid var(--border2);
+  border-radius:99px;padding:7px 11px;cursor:pointer;
+}
+.freq-chip:active{background:var(--primary-soft);border-color:var(--primary);}
+.freq-cal{font-size:10px;color:var(--text3);font-weight:700;}
+
+/* ══ MEAL PHOTO ALBUM ══ */
+.alb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.alb-item{position:relative;border-radius:var(--rsm);overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,0.6);}
+.alb-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.alb-cap{padding:5px 7px;}
+.alb-name{display:block;font-size:10px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.alb-meta{display:block;font-size:9px;font-weight:700;color:var(--text3);}
+.alb-del{position:absolute;top:4px;right:4px;background:rgba(255,255,255,0.85);}
+
+/* Food-log entries logged via photo show the photo, not an emoji */
+.pli-thumb{object-fit:cover;border-radius:10px;flex-shrink:0;}

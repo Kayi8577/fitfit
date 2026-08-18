@@ -12,11 +12,14 @@ import { SECTIONS, activeSection, applyHash } from './features/navigation.js';
 import { toast } from './features/feedback.js';
 import { renderXPBar, checkBadges, renderBadges } from './features/gamification.js';
 import { initCamera, openCamera, closeCamera, triggerUpload, addFoodFromAI, addManualFromCamera } from './features/camera.js';
-import { addFood, deleteFood, renderFoodLog, renderHomeFoodList } from './features/food.js';
+import {
+  addFood, deleteFood, quickAddFood, deleteAlbumEntry, initFoodForm,
+  renderFoodLog, renderHomeFoodList, renderFrequentFoods, renderPhotoAlbum,
+} from './features/food.js';
 import { initFasting, updateFastingInfo } from './features/fasting.js';
 import {
   renderStats, updateDeficit, renderWeekDots, renderWeekChart, renderHistoryChart,
-  saveWeight, deleteWeight, renderWeightHistory,
+  saveWeight, deleteWeight, renderWeightHistory, renderWeightChart,
 } from './features/home.js';
 import {
   renderPhasePills, setPhase, renderWeekPlan, renderTodayWorkout, toggleDone,
@@ -43,6 +46,8 @@ const actions = Object.assign(Object.create(null), {
   addManualCam: () => addManualFromCamera(),
   addFood: () => addFood(),
   delFood: el => deleteFood(Number(el.dataset.index)),
+  quickFood: el => quickAddFood(el.dataset.name),
+  delAlbum: el => deleteAlbumEntry(el.dataset.id),
   addExercise: () => addExercise(),
   delExercise: el => deleteExercise(Number(el.dataset.index)),
   addSleep: () => addSleep(),
@@ -90,8 +95,8 @@ document.addEventListener('keydown', e => {
 // Renderers grouped per section: on state change only the visible section
 // re-renders; the rest are marked dirty and render when navigated to.
 const SECTION_RENDERERS = {
-  home: [renderXPBar, renderStats, renderWeekDots, renderWeekChart, renderHistoryChart, renderHomeFoodList, updateDeficit, renderWeightHistory],
-  food: [renderFoodLog, updateFastingInfo],
+  home: [renderXPBar, renderStats, renderWeekDots, renderWeekChart, renderHistoryChart, renderHomeFoodList, updateDeficit, renderWeightChart, renderWeightHistory],
+  food: [renderFoodLog, renderFrequentFoods, renderPhotoAlbum, updateFastingInfo],
   plan: [renderPhasePills, renderWeekPlan, renderTodayWorkout, renderLibrary, renderExerciseList, updateBurnPreview],
   videos: [renderCategoryTabs, renderVideos],
   more: [renderSleepList, renderBadges, renderGoalProgress, renderReminders],
@@ -151,6 +156,7 @@ function init() {
   renderGreeting();
   setInterval(renderGreeting, 60000); // stays correct if the tab lives past a time-of-day boundary
   initCamera();
+  initFoodForm();
   initFasting();
   initExerciseForm();
   initBMIForm();

@@ -4,15 +4,20 @@ import { XP_REWARDS } from '../config.js';
 import { state } from '../core/state.js';
 import { bus } from '../core/events.js';
 import { $, esc, numVal } from '../utils/dom.js';
-import { compressImage } from '../utils/image.js';
+import { compressImage, thumbnailFromDataUrl } from '../utils/image.js';
 import { analyzeFoodPhoto, hasApiKey } from '../services/ai.js';
 import { buildBackground } from './background.js';
+import { recordFoodUse, addAlbumEntry } from './food.js';
 import { addXP } from './gamification.js';
 import { toast, confetti } from './feedback.js';
 
 const DEFAULT_ACTIONS =
   '<button class="cam-btn cam-btn-sec" data-action="closeCam">✕ 關閉</button>' +
   '<button class="cam-btn cam-btn-main" data-action="triggerUpload">📷 選擇照片</button>';
+
+// The compressed photo currently shown in the modal — the source for the
+// album thumbnail when the food actually gets logged.
+let currentPhoto = null;
 
 export function initCamera() {
   $('file-in').addEventListener('change', handlePhoto);
@@ -25,6 +30,7 @@ export function openCamera() {
 }
 
 export function closeCamera() {
+  currentPhoto = null;
   $('cam-modal').classList.remove('open');
   document.body.style.overflow = '';
   $('cam-preview').classList.remove('show');
@@ -52,6 +58,7 @@ async function handlePhoto(e) {
     return;
   }
 
+  currentPhoto = dataUrl;
   const preview = $('cam-preview');
   preview.src = dataUrl;
   preview.classList.add('show');
@@ -111,25 +118,49 @@ function showManualFallback(reason = '請確認照片清晰，或手動輸入') 
     '<button class="cam-btn cam-btn-main" data-action="triggerUpload">重新拍照</button>';
 }
 
-export function addFoodFromAI(mealType, protein) {
+// Thumbnail of the current photo, or null — logging must never fail
+// just because thumbnail generation did.
+async function tryThumb() {
+  if (!currentPhoto) return null;
+  try { return await thumbnailFromDataUrl(currentPhoto); } catch { return null; }
+}
+
+export async function addFoodFromAI(mealType, protein) {
   const name = ($('ai-fname')?.value || '').trim() || 'AI識別食物';
   const cal = Math.round(numVal('ai-fcal', { min: 0, max: 10000 }));
   if (!cal) { toast('請確認熱量'); return; }
-  state.foodLogs.push({ name, cal, pro: protein, type: mealType, icon: '📸', hasPhoto: true, xp: XP_REWARDS.photoFood });
+
+  const thumb = await tryThumb();
+  const entry = { name, cal, pro: protein, type: mealType, icon: '📸', hasPhoto: true, xp: XP_REWARDS.photoFood };
+  if (thumb) {
+    entry.thumb = thumb;
+    entry.albumId = addAlbumEntry({ thumb, name, cal });
+  }
+  state.foodLogs.push(entry);
   state.counters.meals++;
   state.counters.snaps++;
+  recordFoodUse(name, { cal, pro: protein, type: mealType, icon: '📸' });
   addXP(XP_REWARDS.photoFood, '📸', '拍照識別！', name + ' 已記錄');
   confetti();
   bus.emit('state:changed');
   setTimeout(closeCamera, 700);
 }
 
-export function addManualFromCamera() {
+export async function addManualFromCamera() {
   const name = ($('m-name')?.value || '').trim() || '食物';
   const cal = Math.round(numVal('m-cal', { min: 0, max: 10000 }));
   if (!cal) { toast('請填寫熱量'); return; }
-  state.foodLogs.push({ name, cal, pro: 0, type: '午餐', icon: '✏️', xp: XP_REWARDS.manualFoodFromCamera });
+
+  // A photo was still taken (AI just couldn't read it) — keep it in the album.
+  const thumb = await tryThumb();
+  const entry = { name, cal, pro: 0, type: '午餐', icon: '✏️', xp: XP_REWARDS.manualFoodFromCamera };
+  if (thumb) {
+    entry.thumb = thumb;
+    entry.albumId = addAlbumEntry({ thumb, name, cal });
+  }
+  state.foodLogs.push(entry);
   state.counters.meals++;
+  recordFoodUse(name, { cal, pro: 0, type: '午餐', icon: '✏️' });
   addXP(XP_REWARDS.manualFoodFromCamera, '✏️', '手動記錄', '繼續保持記錄習慣');
   bus.emit('state:changed');
   setTimeout(closeCamera, 600);

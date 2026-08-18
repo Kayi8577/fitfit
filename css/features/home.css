@@ -82,3 +82,20 @@
 
 /* Weight history */
 .wt-hist{font-size:11px;color:var(--text2);margin-top:5px;line-height:1.8;font-weight:700;}
+
+/* ══ WEIGHT TREND CHART ══ */
+.wt-hero{display:flex;align-items:baseline;gap:8px;margin:2px 0 6px;}
+.wt-hero-v{font-size:30px;font-weight:900;color:var(--text);}
+.wt-hero-u{font-size:12px;font-weight:800;color:var(--text3);}
+.wt-hero-d{font-size:12px;font-weight:800;margin-left:auto;}
+.wt-chart-box{position:relative;margin-bottom:8px;}
+.wt-chart-box svg{display:block;width:100%;height:auto;}
+.wt-legend{display:flex;gap:14px;font-size:10px;font-weight:800;color:var(--text2);margin-top:2px;}
+.wt-legend span{display:inline-flex;align-items:center;gap:4px;}
+.wt-lg-dot{width:7px;height:7px;border-radius:99px;background:var(--primary);}
+.wt-lg-line{width:14px;height:0;border-top:2.5px solid var(--navy);border-radius:2px;}
+.wt-tip{
+  position:absolute;pointer-events:none;transform:translate(-50%,-130%);
+  background:var(--text);color:#fff;font-size:10px;font-weight:800;
+  padding:3px 8px;border-radius:8px;white-space:nowrap;display:none;
+}
