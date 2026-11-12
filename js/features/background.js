@@ -4,6 +4,10 @@
 export function buildBackground(container) {
   container.innerHTML = '';
 
+  // Respect reduced-motion: ~45 perpetually-animated nodes are a battery
+  // drain and a vestibular trigger — skip the decorative scene entirely.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
   // Glow orbs
   [
     { w: 260, h: 200, t: '-5%', l: '-8%', bg: 'rgba(180,225,245,0.38)', dur: '5s', del: '0s' },

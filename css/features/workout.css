@@ -1,35 +1,35 @@
 /* ══ WORKOUT CARDS ══ */
-.wkc{background:rgba(255,255,255,0.65);border-radius:var(--rsm);padding:14px;margin-bottom:9px;border:1px solid var(--border);border-left:4px solid var(--mint);}
-.wkc.medium{border-left-color:var(--peach);}
-.wkc.hard{border-left-color:var(--pink);}
+.wkc{background:rgba(255,255,255,0.65);border-radius:var(--rsm);padding:14px;margin-bottom:9px;border:1px solid var(--border);border-left:4px solid var(--primary);}
+.wkc.medium{border-left-color:var(--navy);}
+.wkc.hard{border-left-color:var(--cyan);}
 .wkc.rest-day{border-left-color:var(--lavender);}
 .wkc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;}
 .wkc-name{font-size:15px;font-weight:800;color:var(--text);}
 .wkc-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px;}
 .wkc-tip{font-size:11px;color:var(--text2);margin:5px 0 2px;line-height:1.55;font-weight:600;}
 .wkc-step{display:flex;gap:8px;padding:5px 0;border-top:1px solid var(--border);font-size:12px;color:var(--text2);align-items:flex-start;line-height:1.5;font-weight:600;}
-.wkc-sn{font-size:10px;font-weight:800;color:var(--mint2);min-width:15px;margin-top:2px;}
-.done-btn{padding:7px 14px;font-size:12px;font-weight:800;border-radius:99px;border:2px solid var(--mint);background:transparent;color:var(--mint2);cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
-.done-btn.done{background:var(--mint);color:#fff;border-color:var(--mint);}
+.wkc-sn{font-size:10px;font-weight:800;color:var(--primary-deep);min-width:15px;margin-top:2px;}
+.done-btn{padding:7px 14px;font-size:12px;font-weight:800;border-radius:99px;border:2px solid var(--primary);background:transparent;color:var(--primary-deep);cursor:pointer;font-family:'Nunito',sans-serif;transition:all .15s;white-space:nowrap;}
+.done-btn.done{background:var(--primary);color:#fff;border-color:var(--primary);}
 .done-btn:active{transform:scale(.94);}
 
 /* ══ PHASE PILLS ══ */
 .pph{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-bottom:13px;}
 .pph::-webkit-scrollbar{display:none;}
 .pp{flex-shrink:0;padding:8px 16px;border-radius:99px;font-size:12px;font-weight:800;border:2px solid var(--border2);background:rgba(255,255,255,0.6);color:var(--text2);cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
-.pp.active{background:var(--mint);border-color:var(--mint2);color:#fff;}
+.pp.active{background:var(--primary);border-color:var(--primary-deep);color:#fff;}
 
 /* ══ WEEK PLAN GRID ══ */
 .wkplan{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:14px;}
 .dc{display:flex;flex-direction:column;align-items:center;gap:3px;}
 .dc-lb{font-size:9px;color:var(--text3);font-weight:800;}
 .dc-c{width:34px;height:34px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .25s;background:rgba(255,255,255,0.65);}
-.dc-c.done{background:var(--mint);border-color:var(--mint2);}
-.dc-c.today{border-color:var(--mint2);box-shadow:0 0 0 3px rgba(91,155,213,0.2);}
+.dc-c.done{background:var(--primary);border-color:var(--primary-deep);}
+.dc-c.today{border-color:var(--primary-deep);box-shadow:0 0 0 3px rgba(91,155,213,0.2);}
 .dc-c.rest{opacity:.3;}
 .dc-s{font-size:8px;color:var(--text3);text-align:center;font-weight:700;}
 
 /* ══ LEVEL TABS ══ */
 .ltabs{display:flex;gap:6px;margin-bottom:13px;}
 .lt{flex:1;padding:8px 4px;font-size:11px;font-weight:800;border-radius:var(--rsm);border:2px solid var(--border2);background:rgba(255,255,255,0.6);color:var(--text2);cursor:pointer;font-family:'Nunito',sans-serif;text-align:center;transition:all .2s;}
-.lt.active{border-color:var(--mint);background:rgba(91,155,213,0.15);color:var(--mint2);}
+.lt.active{border-color:var(--primary);background:rgba(91,155,213,0.15);color:var(--primary-deep);}

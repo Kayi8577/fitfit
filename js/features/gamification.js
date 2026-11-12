@@ -8,10 +8,11 @@ import { bus } from '../core/events.js';
 import { $ } from '../utils/dom.js';
 import { toast, showXPPop, confetti } from './feedback.js';
 
-function currentLevelIndex() {
+// Pure so it can be unit-tested: which level (index) does this XP sit in?
+export function levelIndexFor(xp) {
   let idx = 0;
   LEVELS.forEach((_, i) => {
-    if (state.xp >= (i > 0 ? LEVELS[i - 1].max : 0)) idx = i;
+    if (xp >= (i > 0 ? LEVELS[i - 1].max : 0)) idx = i;
   });
   return idx;
 }
@@ -25,8 +26,13 @@ export function addXP(amount, emoji, title, subtitle) {
   if (amount >= 50) confetti();
 }
 
+// Silent rollback used when a log entry is deleted / a check-in is undone.
+export function removeXP(amount) {
+  state.xp = Math.max(0, state.xp - amount);
+}
+
 export function renderXPBar() {
-  const idx = currentLevelIndex();
+  const idx = levelIndexFor(state.xp);
   const level = LEVELS[idx];
   const prevMax = idx > 0 ? LEVELS[idx - 1].max : 0;
   const pct = Math.min(100, Math.round((state.xp - prevMax) / (level.max - prevMax) * 100));

@@ -11,7 +11,7 @@
 .card-2{background:var(--card2);}
 .ct{font-size:11px;font-weight:800;color:var(--text2);letter-spacing:.8px;text-transform:uppercase;margin-bottom:12px;}
 .ct-big{font-size:20px;font-weight:900;color:var(--text);}
-.ct-link{float:right;font-size:11px;color:var(--mint2);cursor:pointer;font-weight:800;}
+.ct-link{float:right;font-size:11px;color:var(--primary-deep);cursor:pointer;font-weight:800;}
 
 /* ══ FORMS ══ */
 .fr{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
@@ -22,21 +22,21 @@
   background:rgba(255,255,255,0.75);color:var(--text);font-family:'Nunito',sans-serif;
   -webkit-appearance:none;transition:border-color .2s;
 }
-.fr input:focus,.fr select:focus{outline:none;border-color:var(--mint);}
+.fr input:focus,.fr select:focus{outline:none;border-color:var(--primary);}
 
 /* ══ BUTTONS ══ */
 .btn-p{
   display:block;width:100%;padding:14px;font-size:15px;font-weight:800;
   border-radius:var(--rsm);border:none;cursor:pointer;font-family:'Nunito',sans-serif;
-  background:linear-gradient(135deg,var(--mint),var(--lavender));
+  background:linear-gradient(135deg,var(--primary),var(--lavender));
   color:#fff;letter-spacing:.2px;transition:all .15s;
   box-shadow:0 4px 16px rgba(91,155,213,0.3);
 }
 .btn-p:active{transform:scale(.97);}
 .btn-s{
   display:block;width:100%;padding:13px;font-size:14px;font-weight:800;
-  border-radius:var(--rsm);border:2px solid var(--mint);cursor:pointer;
-  font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.7);color:var(--mint2);
+  border-radius:var(--rsm);border:2px solid var(--primary);cursor:pointer;
+  font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.7);color:var(--primary-deep);
 }
 .btn-sm{padding:7px 14px;font-size:12px;width:auto;display:inline-block;}
 
@@ -54,14 +54,14 @@
 
 /* Photo log items */
 .pli{display:flex;gap:10px;align-items:center;padding:10px 12px;background:rgba(255,255,255,0.62);border-radius:var(--rsm);margin-bottom:7px;border:1px solid var(--border);}
-.pli-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--mint-soft),var(--lav-soft));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--border);}
+.pli-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary-soft),var(--lav-soft));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;border:1px solid var(--border);}
 .pli-name{font-size:13px;font-weight:700;color:var(--text);}
 .pli-det{font-size:11px;color:var(--text2);margin-top:2px;font-weight:600;}
-.pli-cal{font-size:15px;font-weight:900;color:var(--peach);white-space:nowrap;}
+.pli-cal{font-size:15px;font-weight:900;color:var(--navy);white-space:nowrap;}
 
 /* ══ CHIPS ══ */
 .chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:800;}
-.cm{background:rgba(91,155,213,0.18);color:var(--mint2);}
+.cm{background:rgba(91,155,213,0.18);color:var(--primary-deep);}
 .cl{background:rgba(123,167,232,0.18);color:#3d5fb0;}
 .cp{background:rgba(78,195,224,0.18);color:#1780a8;}
 .co{background:rgba(47,111,176,0.18);color:#1a4d80;}
@@ -81,11 +81,11 @@
 .gr{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
 .gr:last-child{border-bottom:none;}
 .gr-gbar{width:72px;height:5px;background:rgba(140,170,220,0.2);border-radius:99px;margin-top:5px;}
-.gr-gbf{height:5px;border-radius:99px;background:var(--mint);transition:width .6s;}
+.gr-gbf{height:5px;border-radius:99px;background:var(--primary);transition:width .6s;}
 
 /* ══ TOGGLE & REMINDER ROWS ══ */
 .tgl{width:42px;height:25px;background:var(--border2);border-radius:99px;position:relative;cursor:pointer;transition:background .25s;flex-shrink:0;}
-.tgl.on{background:var(--mint);}
+.tgl.on{background:var(--primary);}
 .tgl::after{content:'';position:absolute;width:19px;height:19px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .25s;box-shadow:0 1px 4px rgba(0,0,0,.15);}
 .tgl.on::after{left:20px;}
 .ri{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border);}
@@ -96,3 +96,26 @@
 .sci-ic{font-size:18px;flex-shrink:0;}
 .sci-tx{font-size:12px;color:var(--text2);line-height:1.65;font-weight:600;}
 .sci-tx strong{color:var(--text);font-weight:800;}
+
+/* ══ QUICK-LOG FREQUENT FOODS ══ */
+.freq-wrap{display:flex;flex-wrap:wrap;gap:7px;}
+.freq-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:inherit;font-size:12px;font-weight:800;color:var(--text);
+  background:rgba(255,255,255,0.72);border:1.5px solid var(--border2);
+  border-radius:99px;padding:7px 11px;cursor:pointer;
+}
+.freq-chip:active{background:var(--primary-soft);border-color:var(--primary);}
+.freq-cal{font-size:10px;color:var(--text3);font-weight:700;}
+
+/* ══ MEAL PHOTO ALBUM ══ */
+.alb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.alb-item{position:relative;border-radius:var(--rsm);overflow:hidden;border:1px solid var(--border);background:rgba(255,255,255,0.6);}
+.alb-item img{width:100%;aspect-ratio:1;object-fit:cover;display:block;}
+.alb-cap{padding:5px 7px;}
+.alb-name{display:block;font-size:10px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.alb-meta{display:block;font-size:9px;font-weight:700;color:var(--text3);}
+.alb-del{position:absolute;top:4px;right:4px;background:rgba(255,255,255,0.85);}
+
+/* Food-log entries logged via photo show the photo, not an emoji */
+.pli-thumb{object-fit:cover;border-radius:10px;flex-shrink:0;}

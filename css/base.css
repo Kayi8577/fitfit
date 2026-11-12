@@ -8,7 +8,36 @@ body{
   background:#e6f2fc;
 }
 
+/* Neutral button reset — actionable elements are real <button>s for
+   keyboard/screen-reader access; visual classes style them from scratch. */
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;text-align:inherit;}
+
 hr{border:none;border-top:1px solid var(--border);margin:11px 0;}
 .empty{text-align:center;padding:22px;font-size:13px;color:var(--text3);font-weight:700;}
+.note{font-size:11px;color:var(--text3);line-height:1.6;font-weight:600;margin-top:8px;}
+
+/* Small ✕ delete affordance on log rows */
+.del-x{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:var(--text3);
+  background:rgba(140,170,220,0.14);transition:background .15s,color .15s;
+}
+.del-x:active{background:rgba(78,195,224,0.25);color:var(--cyan);}
+.del-x-sm{width:18px;height:18px;font-size:9px;margin-left:4px;}
+
+.wt-chip{
+  display:inline-flex;align-items:center;gap:2px;
+  font-size:11px;font-weight:700;color:var(--text2);
+  background:rgba(255,255,255,0.62);border:1px solid var(--border);
+  border-radius:99px;padding:4px 8px;margin:0 6px 6px 0;
+}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Respect reduced-motion globally (the decorative background scene is
+   additionally skipped entirely in JS). */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  html{scroll-behavior:auto;}
+}
